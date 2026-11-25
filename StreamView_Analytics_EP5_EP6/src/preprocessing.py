@@ -162,3 +162,9 @@ if __name__ == "__main__":
     print(f"Películas cargadas: {len(df)}")
     print(f"Con datos financieros completos: {len(get_financial_subset(df))}")
     print(f"Duplicados título+año detectados: {df['is_duplicate_title_year'].sum()}")
+
+    # Regenera el catálogo integrado que usan export_looker.py y el dashboard.
+    output = RAW_DIR.parent / "processed" / "catalogo_integrado.csv"
+    catalogo = build_integrated_catalog()
+    catalogo.to_csv(output, index=False)
+    print(f"Catálogo integrado: {len(catalogo)} títulos -> {output}")
